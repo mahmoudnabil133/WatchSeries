@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem">
+  <!-- <img src={{photo}} class="card-img-top" alt="..." /> -->
+  <img src="images/profileimg.jpg" class="card-img-top" alt="..." />
+  <!-- <img [src]="photo" class="card-img-top" alt="..." /> -->
+  <div class="card-body">
+    <h2 class="card-title">{{ userName }}</h2>
+    <h4 class="card-text">
+      {{ userEmail }}
+    </h4>
+    <button href="#" class="btn btn-primary" [disabled]="!isLogin">See Profile</button>
+    <!-- <button href="#" class="btn btn-primary" disabled={{!isLogin}}>See Profile</button> -->
+  </div>
+</div>
