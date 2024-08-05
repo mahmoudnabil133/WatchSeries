@@ -1,13 +1,32 @@
+<div class="container m-4">
+  <input type="text" class="form-control" [(ngModel)]="searchValue" >
+  <h3 class="mt-3">{{searchValue}}</h3>
+</div>
+<!-- <mat-spinner></mat-spinner> -->
 <div class="card" style="width: 18rem">
   <!-- <img src={{photo}} class="card-img-top" alt="..." /> -->
-  <img src="images/profileimg.jpg" class="card-img-top" alt="..." />
-  <!-- <img [src]="photo" class="card-img-top" alt="..." /> -->
+  <!-- <img src="images/profileimg.jpg" class="card-img-top" alt="..." /> -->
+  <img [src]="photo" class="card-img-top" alt="..." />
   <div class="card-body">
     <h2 class="card-title">{{ userName }}</h2>
     <h4 class="card-text">
       {{ userEmail }}
     </h4>
-    <button href="#" class="btn btn-primary" [disabled]="!isLogin">See Profile</button>
+    <!-- <button
+      href="#"
+      class="btn btn-primary"
+      [disabled]="!isLogin"
+      onclick="showProfile()"
+    >
+      See Profile
+    </button> -->
+    <button href="#" class="btn btn-primary" (click)="showProfile(userName)">
+      See Profile
+    </button>
     <!-- <button href="#" class="btn btn-primary" disabled={{!isLogin}}>See Profile</button> -->
   </div>
+</div>
+
+<div>
+  <button (click)="sayHello($event)" class="btn btn-warning">click Me!</button>
 </div>

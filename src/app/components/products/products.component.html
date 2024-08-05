@@ -1,0 +1,59 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  @for (product of productList; track product.id) {
+  <div class="col">
+    <div class="card">
+      <img [src]="product.image" class="card-img-top" />
+      @if (product.price<20) {
+      <div class="m-3 w-25 mx-auto">
+        <button
+          mat-raised-button
+          matBadge="{{ product.price }}"
+          matBadgePosition="before"
+        >
+          Low Price
+        </button>
+      </div>
+      }
+      <div class="card-body">
+        <h5
+          class="card-title"
+          [ngClass]="product.price > 20 ? 'myfont' : 'text-bg-info'"
+        >
+          {{ product.title }}
+        </h5>
+      </div>
+      <!-- condtional rendering -->
+      <p
+        [ngStyle]="{
+          color: product.category == 'jewelery' ? 'black' : 'white',
+          'background-color': 'blue'
+        }"
+      >
+        {{ product.description }}
+      </p>
+    </div>
+  </div>
+  }@empty {
+  <h2>No products Founded!</h2>
+  }
+</div>
+
+<!-- <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let product of productList">
+    <div class="card">
+      <img [src]="product.image" class="card-img-top" />
+      <div class="m-3 w-25 mx-auto" *ngIf="product.price < 20">
+        <button
+          mat-raised-button
+          matBadge="{{ product.price }}"
+          matBadgePosition="before"
+        >
+          Low Price
+        </button>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+      </div>
+    </div>
+  </div>
+</div> -->
