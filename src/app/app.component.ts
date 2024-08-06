@@ -5,6 +5,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { UserComponent } from './components/user/user.component';
 import { ProductsComponent } from './components/products/products.component';
 import { MoviesComponent } from './components/movies/movies.component';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { HomeComponent } from './components/home/home.component';
 
 // decorator,
 // function
@@ -12,7 +14,7 @@ import { MoviesComponent } from './components/movies/movies.component';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,NavbarComponent,FooterComponent,UserComponent,ProductsComponent,
-    MoviesComponent
+    MoviesComponent,MovieDetailsComponent,HomeComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
