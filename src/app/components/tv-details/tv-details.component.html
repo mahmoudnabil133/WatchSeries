@@ -1,0 +1,18 @@
+<div class="col-6 mx-auto">
+    <div class="card mb-5">
+      <img
+        [src]="'https://image.tmdb.org/t/p/original/' + tvShow.poster_path"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ tvShow.name }}
+        </h5>
+        <h6>{{ tvShow.release_date }}</h6>
+        @for (genre of tvShow.genres; track $index) {
+        <span class="badge m-1" [ngClass]="genre.name">{{ genre.name }}</span>
+        }
+      </div>
+    </div>
+  </div>
+  

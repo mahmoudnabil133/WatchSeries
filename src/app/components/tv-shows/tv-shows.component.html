@@ -1,0 +1,38 @@
+<p>tv-shows works!</p>
+<div class="row">
+    <div class="col-4">
+      <button
+        class="btn btn-success btn-lg m-3"
+        (click)="prevPage()"
+        [disabled]="page <= 1"
+      >
+        Prev
+      </button>
+      <button class="btn btn-success btn-lg" (click)="nextPage()"
+        [disabled]="page >=totalPages">Next</button>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    @for (movie of allShows; track movie.id) {
+    <div class="col">
+      <div class="card">
+        <a [routerLink]="['/shows', movie.id]">
+          <img
+            [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
+            class="card-img-top"
+          />
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ movie.name}}
+          </h5>
+          <h6>{{ movie.release_date}}</h6>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    }@empty {
+    <h2>No movies Founded!</h2>
+    }
+  </div>
+  
