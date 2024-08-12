@@ -29,8 +29,8 @@ export class TvShowsComponent implements OnInit, OnDestroy {
       this.subscription = this.showServ
         .getAllShows(newPage)
         .subscribe((response) => {
-          // console.log(response);
-          this.allShows = response.results
+          console.log(response);
+          this.allShows = response.data
           this.page = response.page;
           this.totalPages = response.total_pages;
         });

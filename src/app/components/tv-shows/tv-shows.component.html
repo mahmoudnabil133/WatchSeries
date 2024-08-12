@@ -16,7 +16,7 @@
     @for (movie of allShows; track movie.id) {
     <div class="col">
       <div class="card">
-        <a [routerLink]="['/shows', movie.id]">
+        <a [routerLink]="['/shows', movie._id]">
           <img
             [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
             class="card-img-top"

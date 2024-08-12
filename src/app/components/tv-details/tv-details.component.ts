@@ -13,18 +13,18 @@ import { CommonModule } from '@angular/common';
 export class TvDetailsComponent implements OnInit {
   // movie!: IMovie;
   tvShow!: any;
-  id!: number;
 
   constructor(
     private movieServ: TvShowService,
     private route: ActivatedRoute
   ) {}
   ngOnInit() {
-    this.id = Number(this.route.snapshot.paramMap.get('id')!);
-    this.movieServ.getShowById(this.id).subscribe((response) => {
+    const id: string = (this.route.snapshot.paramMap.get('id')!);
+    console.log(id);
+    this.movieServ.getShowById(id).subscribe((response) => {
       console.log(response);
       
-      this.tvShow = response;
+      this.tvShow = response.data;
     });
   }
 }
