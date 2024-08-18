@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const TvShow = require('../models/tvShow');
+const seasonRouter = require('./seasonRouter');
 router.route('/')
     .get(async (req, res)=>{
         try{
@@ -79,5 +80,5 @@ router.route('/:id')
         }
     });
 
-
+router.use('/:showId/seasons', seasonRouter);
 module.exports = router;

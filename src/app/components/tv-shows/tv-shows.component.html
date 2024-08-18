@@ -1,38 +1,56 @@
-<p>tv-shows works!</p>
-<div class="row">
-    <div class="col-4">
+<div class="container">
+  <h1 class="text-center my-4">TV Shows</h1>
+  <div class="row justify-content-center mb-4">
+    <div class="col-auto">
       <button
-        class="btn btn-success btn-lg m-3"
+        class="btn btn-success btn-lg"
         (click)="prevPage()"
         [disabled]="page <= 1"
       >
         Prev
       </button>
-      <button class="btn btn-success btn-lg" (click)="nextPage()"
-        [disabled]="page >=totalPages">Next</button>
+    </div>
+    <div class="col-auto">
+      <button
+        class="btn btn-success btn-lg"
+        (click)="nextPage()"
+        [disabled]="page >= totalPages"
+      >
+        Next
+      </button>
     </div>
   </div>
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    @for (movie of allShows; track movie.id) {
-    <div class="col">
-      <div class="card">
-        <a [routerLink]="['/shows', movie._id]">
+    <div class="col" *ngFor="let show of allShows; trackBy: trackById">
+      <div class="card h-100">
+        <a [routerLink]="['/shows', show._id]">
           <img
-            [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
+            [src]="'https://image.tmdb.org/t/p/original/' + show.poster_path"
             class="card-img-top"
+            alt="{{ show.name }}"
           />
         </a>
         <div class="card-body">
-          <h5 class="card-title">
-            {{ movie.name}}
-          </h5>
-          <h6>{{ movie.release_date}}</h6>
-          <p></p>
+          <h5 class="card-title">{{ show.name }}</h5>
+          <h6 class="card-subtitle text-muted">
+            {{ show.first_air_date | date: 'longDate' }}
+          </h6>
+          <p class="card-text">
+            {{ show.overview || 'No overview available' }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Seasons: {{ show.number_of_seasons }},
+              Episodes: {{ show.number_of_episodes }}
+            </small>
+          </p>
         </div>
       </div>
     </div>
-    }@empty {
-    <h2>No movies Founded!</h2>
-    }
   </div>
-  
+
+  <div *ngIf="!allShows.length">
+    <h2 class="text-center">No TV Shows Found!</h2>
+  </div>
+</div>

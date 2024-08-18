@@ -1,10 +1,7 @@
-import { CommonModule, DatePipe, UpperCasePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MoviesService } from '../../services/movies.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { RouterModule } from '@angular/router';
-import { P } from '@angular/cdk/keycodes';
-import { ITvShow } from './ITvShow';
 import { TvShowService } from '../../services/tv-show.service';
 
 @Component({
@@ -12,7 +9,7 @@ import { TvShowService } from '../../services/tv-show.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './tv-shows.component.html',
-  styleUrl: './tv-shows.component.css'
+  styleUrls: ['./tv-shows.component.css']
 })
 export class TvShowsComponent implements OnInit, OnDestroy {
   allShows: any[] = [];
@@ -20,17 +17,17 @@ export class TvShowsComponent implements OnInit, OnDestroy {
   currentPage!: BehaviorSubject<number>;
   page!: number;
   totalPages!: number;
+
   constructor(private showServ: TvShowService) {
     this.currentPage = new BehaviorSubject<number>(this.page);
   }
-  // hook
+
   ngOnInit() {
     this.currentPage.subscribe((newPage) => {
       this.subscription = this.showServ
         .getAllShows(newPage)
         .subscribe((response) => {
-          console.log(response);
-          this.allShows = response.data
+          this.allShows = response.data;
           this.page = response.page;
           this.totalPages = response.total_pages;
         });
@@ -42,16 +39,20 @@ export class TvShowsComponent implements OnInit, OnDestroy {
       this.currentPage.next(++this.page);
     }
   }
+
   prevPage() {
     if (this.page > 1) {
       this.currentPage.next(--this.page);
     }
   }
 
+  trackById(index: number, show: any): string {
+    return show._id;
+  }
+
   ngOnDestroy() {
-    //navigate
-    // cleanup
-    console.log('Movies Component destroyed');
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

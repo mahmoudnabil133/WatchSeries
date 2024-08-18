@@ -1,0 +1,33 @@
+<div class="episode-container">
+    <div class="episode-header">
+      <h2>{{ episode.name }} (Season {{ episode.season_number }}, Episode {{ episode.episode_number }})</h2>
+      <p class="air-date">Air Date: {{ episode.air_date | date: 'longDate' }}</p>
+    </div>
+  
+    <div class="episode-overview">
+      <p>{{ episode.overview }}</p>
+    </div>
+  
+    <div class="episode-cast-crew">
+      <h3>Crew</h3>
+      <div class="crew-list">
+        <div *ngFor="let crewMember of episode.crew" class="crew-member">
+          <img *ngIf="crewMember.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + crewMember.profile_path" alt="{{ crewMember.name }}">
+          <div class="crew-info">
+            <p><strong>{{ crewMember.name }}</strong> ({{ crewMember.job }})</p>
+          </div>
+        </div>
+      </div>
+  
+      <h3>Guest Stars</h3>
+      <div class="guest-stars-list">
+        <div *ngFor="let guestStar of episode.guest_stars" class="guest-star">
+          <img *ngIf="guestStar.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + guestStar.profile_path" alt="{{ guestStar.name }}">
+          <div class="guest-star-info">
+            <p><strong>{{ guestStar.name }}</strong> as {{ guestStar.character }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

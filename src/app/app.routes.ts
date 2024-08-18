@@ -7,6 +7,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { TvShowsComponent } from './components/tv-shows/tv-shows.component';
 import { TvDetailsComponent } from './components/tv-details/tv-details.component';
+import { SeasonDetailsComponent } from './components/season-details/season-details.component';
+import { EpisodeDetailsComponent } from './components/episode-details/episode-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -15,6 +17,8 @@ export const routes: Routes = [
   { path: 'details/:id', component: MovieDetailsComponent },
   { path: 'shows', component: TvShowsComponent },
   { path: 'shows/:id', component: TvDetailsComponent },
+  { path: 'shows/:id/seasons/:seasonNumber', component: SeasonDetailsComponent },
+  { path: 'shows/:showId/seasons/:seasonId/episodes/:episodeNumber', component: EpisodeDetailsComponent },
   { path: 'about', component: AboutusComponent },
   { path: 'contact', component: ContactusComponent },
   { path: '**', component: PageNotFoundComponent },

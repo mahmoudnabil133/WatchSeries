@@ -21,4 +21,24 @@ export class TvShowService {
       `http://localhost:3000/shows/${tvShowId}`
     );
   }
+  getSeasons(tvShowId: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:3000/shows/${tvShowId}/seasons`
+    );
+  }
+  getSeasonsBySeasonNumber(tvShowId: string, seasonNumber: number): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:3000/shows/${tvShowId}/seasons/${seasonNumber}`
+    );
+  }
+  getEpisodesForSeason(tvShowId: string, seasonId: string): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:3000/shows/${tvShowId}/seasons/${seasonId}/episodes`
+    );
+  }
+  getOneEpisodesForSeason(tvShowId: string, seasonId: string, episodeNumber: number): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:3000/shows/${tvShowId}/seasons/${seasonId}/episodes/${episodeNumber}`
+    );
+  }
 }

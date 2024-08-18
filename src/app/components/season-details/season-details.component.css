@@ -1,0 +1,68 @@
+.container {
+    max-width: 1200px;
+  }
+  
+  .season-details {
+    background-color: #f8f9fa;
+  }
+  
+  .season-details img {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .season-details h2 {
+    font-size: 2rem;
+    color: #343a40;
+  }
+  
+  .episodes-list h3 {
+    color: #343a40;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-img-top {
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .rating .badge {
+    font-size: 0.9rem;
+  }
+  
+  .overview {
+    font-size: 0.9rem;
+    color: #495057;
+  }
+  
+  @media (max-width: 768px) {
+    .season-details img {
+      margin-bottom: 20px;
+    }
+  
+    .season-details h2 {
+      font-size: 1.5rem;
+    }
+  
+    .episodes-list h3 {
+      font-size: 1.5rem;
+    }
+  }
+  
