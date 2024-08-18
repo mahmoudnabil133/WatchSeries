@@ -6,13 +6,38 @@ router.route('/')
     .get(async (req, res)=>{
         try{
             const page = parseInt(req.query.page) || 1;
-            const pageSize = 5;
-            const shows = await TvShow.find().skip(pageSize * (page - 1)).limit(pageSize);
+            const pageSize = 20;
+            let query = {};
+            console.log(req.query)
+            if (req.query.name) {
+                // user rgex to search for name
+                query.name = new RegExp(req.query.name, 'i');
+            }
+            // how to get series if one genre queried in genres_id
+            if (req.query.genre) {
+                const genre_ids = req.query.genre.map(genre =>parseInt(genre));
+                query.genre_ids = { $all: genre_ids};
+            }
+            if (req.query.adult) {
+                query.adult = req.query.adult;
+            }
+            if (req.query.language) {
+                query.original_language = req.query.language;
+            }
+            if (req.query.vote_average){
+                query.vote_average = { $gte: req.query.vote_average};
+            }
+            if (req.query.popularity){
+                query.popularity = { $gte: req.query.popularity};
+            }
+            console.log(query)
+            const shows = await TvShow.find(query).skip(pageSize * (page - 1)).limit(pageSize);
             const docsCount = await TvShow.countDocuments()
             const totPages = Math.ceil(docsCount / pageSize);
             if (shows.length == 0) throw new Error('No shows founds');
             res.status(200).json({
                 success: true,
+                result: shows.length,
                 data: shows,
                 page: page,
                 total_pages: totPages
