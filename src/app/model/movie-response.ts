@@ -1,4 +1,4 @@
-import { IMovie } from '../components/movies/IMovie';
+import { IMovie } from './IMovie';
 
 export interface MovieResponse {
   page: number;

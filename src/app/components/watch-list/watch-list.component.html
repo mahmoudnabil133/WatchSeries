@@ -1,14 +1,14 @@
 <div class="container">
-  @if (!allShows||!allShows.length) {
+  @if (!watchList || !watchList.length) {
   <div style="height: 54vh">
-    <h1 class="text-center">No TV Shows Found!</h1>
+    <h1 class="text-center">WatchList is Empty!</h1>
   </div>
-  }@else{
-  <h1 class="text-center my-4">TV Shows</h1>
+  }@else {
+  <h1 class="text-center my-4">WatchList</h1>
 
   <div class="row justify-content-center mb-4">
     <div class="row row-cols-1 row-cols-md-3 g-4 pb-4">
-      <div class="col" *ngFor="let show of allShows; trackBy: trackById">
+      <div class="col" *ngFor="let show of watchList; trackBy: trackById">
         <div class="card h-100">
           <a [routerLink]="['/shows', show._id]">
             <img
@@ -34,27 +34,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="col-auto">
-      <button
-        class="btn btn-lg text-light"
-        (click)="prevPage()"
-        [disabled]="page <= 1"
-        style="background-color: #01b4e4"
-      >
-        Prev
-      </button>
-    </div>
-    <div class="col-auto">
-      <button
-        class="btn btn-lg text-light"
-        (click)="nextPage()"
-        [disabled]="page >= totalPages"
-        style="background-color: #01b4e4"
-      >
-        Next
-      </button>
     </div>
   </div>
   }

@@ -1,26 +1,23 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { MoviesComponent } from './components/movies/movies.component';
-import { AboutusComponent } from './components/aboutus/aboutus.component';
-import { ContactusComponent } from './components/contactus/contactus.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { TvShowsComponent } from './components/tv-shows/tv-shows.component';
 import { TvDetailsComponent } from './components/tv-details/tv-details.component';
 import { SeasonDetailsComponent } from './components/season-details/season-details.component';
 import { EpisodeDetailsComponent } from './components/episode-details/episode-details.component';
+import { WatchListComponent } from './components/watch-list/watch-list.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'movies', component: MoviesComponent },
-  { path: 'details/:id', component: MovieDetailsComponent },
+  { path: '', redirectTo: 'shows', pathMatch: 'full' },
   { path: 'shows', component: TvShowsComponent },
   { path: 'shows/:id', component: TvDetailsComponent },
-  { path: 'shows/:id/seasons/:seasonNumber', component: SeasonDetailsComponent },
-  { path: 'shows/:showId/seasons/:seasonId/episodes/:episodeNumber', component: EpisodeDetailsComponent },
-  { path: 'about', component: AboutusComponent },
-  { path: 'contact', component: ContactusComponent },
+  {
+    path: 'shows/:id/seasons/:seasonNumber',
+    component: SeasonDetailsComponent,
+  },
+  {
+    path: 'shows/:showId/seasons/:seasonId/episodes/:episodeNumber',
+    component: EpisodeDetailsComponent,
+  },
+  { path: 'users/:userId/watchList', component: WatchListComponent },
   { path: '**', component: PageNotFoundComponent },
-  
 ];
