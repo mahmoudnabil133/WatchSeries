@@ -8,15 +8,20 @@ router.route('/')
             const page = parseInt(req.query.page) || 1;
             const pageSize = 20;
             let query = {};
-            console.log(req.query)
+            console.log('sasasaapsla,sla,')
             if (req.query.name) {
                 // user rgex to search for name
                 query.name = new RegExp(req.query.name, 'i');
             }
             // how to get series if one genre queried in genres_id
             if (req.query.genre) {
-                const genre_ids = req.query.genre.map(genre =>parseInt(genre));
-                query.genre_ids = { $all: genre_ids};
+                if (req.query.genre.includes(',')) {
+                    console.log('s')
+                    const genre_ids = req.query.genre.split(',').map(genre =>parseInt(genre));
+                    query.genre_ids = { $all: genre_ids};
+                } else{
+                    query.genre_ids = parseInt(req.query.genre);
+                }
             }
             if (req.query.adult) {
                 query.adult = req.query.adult;
@@ -85,12 +90,12 @@ router.route('/')
         }
     });
 
-// get movie by id
+// get series by id
 router.route('/:id')
     .get(async (req, res)=>{
         try{
             const {id} = req.params;
-            console.log(id)
+            console.log('sasasasas')
             const show = await TvShow.findById(id);
             if (!show) throw new Error('no show with this id');
             res.status(200).json({

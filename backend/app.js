@@ -3,7 +3,8 @@ const connectDB = require("./config");
 const tvRouter = require("./routes/tvRouter");
 const seasonRouter = require("./routes/seasonRouter");
 const episodeRouter = require("./routes/episodeRouter");
-const userRouter = require("./routes/userRouter");
+const userRouter = require("./routes/userRouter");;
+const genresRouter = require('./routes/genresRouter');
 const PORT = 3000;
 const cors = require("cors");
 
@@ -16,6 +17,7 @@ app.use("/shows", tvRouter);
 app.use("/seasons", seasonRouter);
 app.use("/episodes", episodeRouter);
 app.use("/users", userRouter);
+app.use('/genres', genresRouter)
 app.listen(PORT, () => {
   console.log("server running on port 3000");
   connectDB();
