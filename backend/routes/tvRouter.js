@@ -8,7 +8,7 @@ router.route('/')
             const page = parseInt(req.query.page) || 1;
             const pageSize = 20;
             let query = {};
-            console.log('sasasaapsla,sla,')
+            console.log(req.query)
             if (req.query.name) {
                 // user rgex to search for name
                 query.name = new RegExp(req.query.name, 'i');
@@ -16,7 +16,7 @@ router.route('/')
             // how to get series if one genre queried in genres_id
             if (req.query.genre) {
                 if (req.query.genre.includes(',')) {
-                    console.log('s')
+                    console.log('genres inc ,')
                     const genre_ids = req.query.genre.split(',').map(genre =>parseInt(genre));
                     query.genre_ids = { $all: genre_ids};
                 } else{
@@ -30,10 +30,10 @@ router.route('/')
                 query.original_language = req.query.language;
             }
             if (req.query.vote_average){
-                query.vote_average = { $gte: req.query.vote_average};
+                query.vote_average = { $gte: parseInt(req.query.vote_average)};
             }
             if (req.query.popularity){
-                query.popularity = { $gte: req.query.popularity};
+                query.popularity = { $gte: parseInt(req.query.popularity)};
             }
             console.log(query)
             const shows = await TvShow.find(query).skip(pageSize * (page - 1)).limit(pageSize);

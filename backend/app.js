@@ -19,6 +19,6 @@ app.use("/episodes", episodeRouter);
 app.use("/users", userRouter);
 app.use('/genres', genresRouter)
 app.listen(PORT, () => {
-  console.log("server running on port 3000");
+  console.log(`server running on port ${PORT}`);
   connectDB();
 });

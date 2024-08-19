@@ -62,7 +62,7 @@ export class TvShowsComponent implements OnInit, OnDestroy {
     } else{
       this.genres_ids.push(genreId)
     }
-    this.searchShow()
+    this.loadShows()
   }
   nextPage() {
     if (this.page < this.totalPages) {

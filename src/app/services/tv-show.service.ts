@@ -22,6 +22,7 @@ export class TvShowService {
     if (queryParms.showRate){
       params = params.set('vote_average', queryParms.showRate);
     }
+    console.log(params)
     return this.http.get<MovieResponse>(
       `http://localhost:3000/shows?page=${pageNumber}`, {params}
     );
