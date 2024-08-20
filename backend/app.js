@@ -17,7 +17,7 @@ app.use("/shows", tvRouter);
 app.use("/seasons", seasonRouter);
 app.use("/episodes", episodeRouter);
 app.use("/users", userRouter);
-app.use('/genres', genresRouter)
+app.use('/genres', genresRouter);
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
   connectDB();
