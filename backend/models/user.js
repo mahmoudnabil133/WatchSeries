@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const UserSchema = mongoose.Schema({
-  userName: { required: true, type: String },
-  email: { required: true, type: String },
-  password: { required: true, type: String },
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
   watchList: [{ type: mongoose.Schema.Types.ObjectId, ref: "Show" }],
 });
 

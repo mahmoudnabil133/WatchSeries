@@ -1,4 +1,7 @@
 const express = require("express");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 const connectDB = require("./config");
 const tvRouter = require("./routes/tvRouter");
 const seasonRouter = require("./routes/seasonRouter");

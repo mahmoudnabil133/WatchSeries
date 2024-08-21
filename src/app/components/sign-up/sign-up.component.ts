@@ -10,6 +10,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { passwordMatchValidator } from '../../shared/password-match.directive';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,12 +20,15 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent {
-  registerForm: FormGroup;
+  username: string = '';
+  Email: string = '';
+  Password: string = '';
+  errorMessage: string = '';
 
   constructor(
-    private fb: FormBuilder,
+    private authService: AuthService,
     private router: Router,
-    private http: HttpClient
+    private fb: FormBuilder
   ) {
     this.registerForm = this.fb.group(
       {
@@ -46,6 +50,27 @@ export class SignUpComponent {
     );
   }
 
+  onSignup(): void {
+    this.authService.signup(this.username, this.Email, this.Password).subscribe(
+      (response) => {
+        console.log('User registered successfully', response);
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Error occurred during signup', error);
+        this.errorMessage = error.error.message || 'Failed to register';
+      }
+    );
+  }
+
+  registerForm: FormGroup;
+
+  // constructor(
+  //   private fb: FormBuilder,
+  //   private router: Router,
+  //   private http: HttpClient
+  // ) {}
+
   get fullName() {
     return this.registerForm.controls['fullName'];
   }
@@ -66,25 +91,25 @@ export class SignUpComponent {
     return this.registerForm.controls['checked'];
   }
 
-  onSubmit() {
-    console.log(':,pk,');
+  // onSubmit() {
+  //   console.log(':,pk,');
 
-    if (this.registerForm.valid) {
-      this.http
-        .post(
-          'http://localhost:3000/users/registerUser',
-          this.registerForm.value
-        )
-        .subscribe(
-          (response) => {
-            console.log('User registered successfully', response);
-            this.router.navigate(['/shows']);
-          },
-          (error) => {
-            console.error('Error registering user', error);
-          }
-        );
-      console.log('Form Submitted', this.registerForm.value);
-    }
-  }
+  //   if (this.registerForm.valid) {
+  //     this.http
+  //       .post(
+  //         'http://localhost:3000/users/registerUser',
+  //         this.registerForm.value
+  //       )
+  //       .subscribe(
+  //         (response) => {
+  //           console.log('User registered successfully', response);
+  //           this.router.navigate(['/shows']);
+  //         },
+  //         (error) => {
+  //           console.error('Error registering user', error);
+  //         }
+  //       );
+  //     console.log('Form Submitted', this.registerForm.value);
+  //   }
+  // }
 }

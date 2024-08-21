@@ -2,8 +2,6 @@ const express = require("express");
 const User = require("../models/user");
 const TvShows = require("../models/tvShow");
 const router = express.Router();
-var key = '123456789trytryrtyr';
-var encryptor = require('simple-encryptor')(key);
 
 router.get("/:id/watchList", (req, res, next) => {
   User.find({ id: req.params.id })
@@ -33,48 +31,53 @@ router.get("/:id/watchList", (req, res, next) => {
 });
 
 //register new user
-router.post("/registerUser", (req, res) => {
-  var data = req.body;
-  var encrypted = encryptor.encrypt(data.password);
-  var newUser = new User({
-    userName: data.userName,
-    email: data.email,
-    password: encrypted,
-  });
+router.post("/signup", async (req, res) => {
+  const { username, email, password } = req.body;
   try {
-    newUser.save().then(() => {
-      console.log("User Added Successfully")
-    }).catch(() => {
-      console.log("Somthing went wrong");
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
     });
+
+    await newUser.save();
+    res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
 
 
-router.get("/login", (req, res) => {
-  User.findOne({ email: req.params.email }, function getresult(errorvalue, result) {
-    if (errorvalue) {
-      reject({ status: false, msg: "Invaild Data" });
-    }
-    else {
-      if (result != undefined && result != null) {
-        var decrypted = encryptor.decrypt(result.password);
-        if (decrypted == User.password) {
-          resolve({ status: true, msg: "User Validated Successfully" });
-        }
-        else {
-          reject({ status: false, msg: "User Validation failed" });
-        }
-      }
-      else {
-        reject({ status: false, msg: "Error!!!!" });
-      }
-    }
-  })
-});
+router.get("/login", async (req, res) => {
+  const { email, password } = req.body;
 
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    const token = jwt.sign({ id: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+
+    res.json({ token });
+
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+
+});
 
 module.exports = router;
