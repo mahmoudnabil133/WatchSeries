@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/user");
 const TvShows = require("../models/tvShow");
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 router.get("/:id/watchList", (req, res, next) => {
@@ -57,7 +58,7 @@ router.post("/signup", async (req, res) => {
 
 
 
-router.get("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -76,7 +77,7 @@ router.get("/login", async (req, res) => {
     res.json({ token });
 
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: err.message });
   }
 
 });
