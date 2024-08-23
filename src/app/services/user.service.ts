@@ -89,4 +89,23 @@ export class UserService {
   removeCookie(): void{
     this.cookieService.delete('jwt');
   }
+  // watchList endpoints
+  getWatchList(): Observable<any>{
+    return this.http.get('http://localhost:3000/watchList', {withCredentials: true}).pipe(
+      catchError((error) => {
+        return throwError(() => new Error(error.error?.msg || 'delete profile failed. Please try again.'));
+      }))
+  }
+  addToWatchList(tvId: string): Observable<any>{
+    return this.http.post('http://localhost:3000/watchList', {tvId}, {withCredentials: true}).pipe(
+      catchError((error) => {
+        return throwError(() => new Error(error.error?.msg || 'adding to watchlist failed. Please try again.'));
+      }))
+  }
+  removeFromWatchList(tvId: string): Observable<any>{
+    return this.http.delete(`http://localhost:3000/watchList/${tvId}`, {withCredentials: true}).pipe(
+      catchError((error) => {
+        return throwError(() => new Error(error.error?.msg || 'deleteing from watchList failed. Please try again.'));
+      }))
+  }
 }

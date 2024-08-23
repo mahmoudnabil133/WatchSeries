@@ -62,9 +62,9 @@ router.route('/updateMyPassword')
 
 router.route('/watchList')
   .get(watchListContraller.getWatchList)
-router.route('/addToWatchList')
+router.route('/watchList')
   .post(watchListContraller.addToWatchList);
-router.route('/removeFromWatchList/:id')
+router.route('/watchList/:id')
   .delete(watchListContraller.removeFromWatchList);
 
 

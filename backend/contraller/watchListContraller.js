@@ -14,6 +14,7 @@ const getWatchList = async (req, res) =>{
         }
         res.status(200).json({
             success: true,
+            result: watchList.length,
             data: watchList
         })
 
@@ -31,7 +32,7 @@ const addToWatchList = async (req, res) =>{
         if(!user) throw new Error('User not found');
         const seriesId = req.body.seriesId;
         user.watchList.push(seriesId);
-        await user.save();
+        await user.save({validateBeforeSave: false});
         res.status(200).json({
             success: true,
             msg: 'Added to watchlist'
@@ -52,8 +53,8 @@ const removeFromWatchList = async(req, res) =>{
         const seriesId = req.params.id;
         const index = user.watchList.indexOf(seriesId);
         if (index === -1) throw new Error('series not found in watchlist');
-        user.splice(index, 1);
-        await user.save();
+        user.watchList.splice(index, 1);
+        await user.save({validateBeforeSave: false});
         res.status(200).json({
             success: true,
             msg: 'Removed from watchlist'
