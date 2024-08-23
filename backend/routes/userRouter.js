@@ -3,6 +3,7 @@ const User = require("../models/user");
 const TvShows = require("../models/tvShow");
 const userContraller = require("../contraller/userContraller");
 const authContraller = require("../contraller/authContraller");
+const watchListContraller = require("../contraller/watchListContraller");
 const router = express.Router();
 
 router.get("/:id/watchList", (req, res, next) => {
@@ -58,6 +59,14 @@ router.route('/logout')
   .get(authContraller.logout)
 router.route('/updateMyPassword')
   .patch(authContraller.updatePassword);
+
+router.route('/watchList')
+  .get(watchListContraller.getWatchList)
+router.route('/addToWatchList')
+  .post(watchListContraller.addToWatchList);
+router.route('/removeFromWatchList/:id')
+  .delete(watchListContraller.removeFromWatchList);
+
 
 // 3) admin routes
 router.use(authContraller.restrictTo('admin'));
