@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const TvShow = require('../models/tvShow');
 const seasonRouter = require('./seasonRouter');
+const authContraller = require('../contraller/authContraller');
 router.route('/')
     .get(async (req, res)=>{
         try{
             const page = parseInt(req.query.page) || 1;
             const pageSize = 20;
             let query = {};
-            console.log(req.query)
             if (req.query.name) {
                 // user rgex to search for name
                 query.name = new RegExp(req.query.name, 'i');
@@ -16,7 +16,6 @@ router.route('/')
             // how to get series if one genre queried in genres_id
             if (req.query.genre) {
                 if (req.query.genre.includes(',')) {
-                    console.log('genres inc ,')
                     const genre_ids = req.query.genre.split(',').map(genre =>parseInt(genre));
                     query.genre_ids = { $all: genre_ids};
                 } else{
@@ -92,10 +91,9 @@ router.route('/')
 
 // get series by id
 router.route('/:id')
-    .get(async (req, res)=>{
+    .get(authContraller.protect, async (req, res)=>{
         try{
             const {id} = req.params;
-            console.log('sasasasas')
             const show = await TvShow.findById(id);
             if (!show) throw new Error('no show with this id');
             res.status(200).json({

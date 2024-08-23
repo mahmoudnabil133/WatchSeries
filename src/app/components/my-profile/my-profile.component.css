@@ -1,0 +1,91 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .profile-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+  }
+  
+  .profile-header {
+    margin-bottom: 20px;
+  }
+  
+  .profile-photo {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+  }
+  
+  .profile-header h2 {
+    margin: 0;
+    font-size: 26px;
+    color: #333;
+  }
+  
+  .profile-role {
+    font-size: 16px;
+    color: #777;
+    margin-top: 5px;
+  }
+  
+  .profile-details {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  
+  .profile-details p {
+    margin: 5px 0;
+    font-size: 18px;
+  }
+  
+  .profile-footer {
+    text-align: center;
+  }
+  
+  .watchlist-btn {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .watchlist-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .profile-footer ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+  }
+  
+  .profile-footer ul li {
+    background-color: #e7f3ff;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .profile-footer p {
+    font-size: 16px;
+    color: #999;
+  }
+  

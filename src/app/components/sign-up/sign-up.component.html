@@ -1,0 +1,46 @@
+<div class="sign-up-container">
+    <h2>Sign Uppppp</h2>
+    <form [formGroup]="signUpForm" (ngSubmit)="signupUser()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" formControlName="username" class="form-control" />
+        <div *ngIf="signUpForm.get('username')?.invalid && signUpForm.get('username')?.touched">
+          <small *ngIf="signUpForm.get('username')?.errors?.['required']">Username is required.</small>
+          <small *ngIf="signUpForm.get('username')?.errors?.['minlength']">Username must be at least 4 characters long.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" class="form-control" />
+        <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+          <small *ngIf="signUpForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="signUpForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" class="form-control" />
+        <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+          <small *ngIf="signUpForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small *ngIf="signUpForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input id="confirmPassword" type="password" formControlName="confirmPassword" class="form-control" />
+        <div *ngIf="signUpForm.errors?.['mismatch']">
+          <small>Passwords do not match.</small>
+        </div>
+      </div>
+  
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid">Sign Up</button>
+    </form>
+  </div>
+  

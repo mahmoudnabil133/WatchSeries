@@ -1,0 +1,57 @@
+<div class="container mt-5">
+    <!-- Display User Data -->
+    <div class="user-data mb-4">
+      <h2>User Data</h2>
+      <p><strong>Username:</strong> {{ user.userName }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+  
+    <!-- Update Username/Email Button -->
+    <button class="btn btn-primary mb-3" (click)="showUpdateForm('user')">Update Username/Email</button>
+  
+    <!-- Update Password Button -->
+    <button class="btn btn-warning mb-3" (click)="showUpdateForm('password')">Update Password</button>
+  
+    <!-- Delete Account Button -->
+    <button class="btn btn-danger" (click)="deleteAccount()">Delete Account</button>
+  
+    <!-- Update Form (Username/Email) -->
+    <div *ngIf="isUpdateFormVisible === 'user'" class="update-form mt-3">
+      <h3>Update Username/Email</h3>
+      <form [formGroup]="updateUserForm" (ngSubmit)="updateUserProfile()">
+        <div class="mb-3">
+          <label for="username" class="form-label">New Username</label>
+          <input type="text" id="username" formControlName="userName" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">New Email</label>
+          <input type="email" id="email" formControlName="email" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="isUpdateFormVisible = null">Cancel</button>
+      </form>
+    </div>
+  
+    <!-- Update Form (Password) -->
+    <div *ngIf="isUpdateFormVisible === 'password'" class="update-form mt-3">
+      <h3>Update Password</h3>
+      <form [formGroup]="passwordForm" (ngSubmit)="updateUserPassword()">
+        <div class="mb-3">
+          <label for="passwordCurrent" class="form-label">Current Password</label>
+          <input type="password" id="passwordCurrent" formControlName="passwordCurrent" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">New Password</label>
+          <input type="password" id="password" formControlName="password" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm New Password</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" />
+          <div *ngIf="passwordForm.errors?.['mismatch']" class="text-danger mt-2">Passwords do not match</div>
+        </div>
+        <button type="submit" class="btn btn-warning">Update Password</button>
+        <button type="button" class="btn btn-secondary" (click)="isUpdateFormVisible = null">Cancel</button>
+      </form>
+    </div>
+  </div>
+  

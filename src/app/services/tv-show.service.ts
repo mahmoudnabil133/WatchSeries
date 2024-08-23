@@ -29,7 +29,7 @@ export class TvShowService {
   }
 
   getShowById(tvShowId: string): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/shows/${tvShowId}`);
+    return this.http.get<any>(`http://localhost:3000/shows/${tvShowId}`, {withCredentials: true});
   }
   getSeasons(tvShowId: string): Observable<any> {
     return this.http.get<any>(
