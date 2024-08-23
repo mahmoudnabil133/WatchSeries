@@ -1,46 +1,102 @@
-<div class="sign-up-container">
-    <h2>Sign Uppppp</h2>
-    <form [formGroup]="signUpForm" (ngSubmit)="signupUser()">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" formControlName="username" class="form-control" />
-        <div *ngIf="signUpForm.get('username')?.invalid && signUpForm.get('username')?.touched">
-          <small *ngIf="signUpForm.get('username')?.errors?.['required']">Username is required.</small>
-          <small *ngIf="signUpForm.get('username')?.errors?.['minlength']">Username must be at least 4 characters long.</small>
+<div class="sign-up-container m-5">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <h2 class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign Up</h2>
+
+                <form [formGroup]="signUpForm" (ngSubmit)="signupUser()" class="mx-1 mx-md-4">
+                  <div class="form-group d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="username">Username</label>
+                      <input id="username" formControlName="username" class="w-full form-control" placeholder="Type your username" />
+                      <div *ngIf="signUpForm.get('username')?.invalid && signUpForm.get('username')?.touched">
+                        <small class="block p-error text-danger" *ngIf="signUpForm.get('username')?.errors?.['required']">
+                          Username is required.
+                        </small>
+                        <small class="block p-error text-danger" *ngIf="signUpForm.get('username')?.errors?.['minlength']">
+                          Username must be at least 4 characters long.
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="email">Email</label>
+                      <input id="email" formControlName="email" class="w-full form-control" placeholder="Type your email" />
+                      <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+                        <small class="block p-error text-danger" *ngIf="signUpForm.get('email')?.errors?.['required']">
+                          Email is required.
+                        </small>
+                        <small class="block p-error text-danger" *ngIf="signUpForm.get('email')?.errors?.['email']">
+                          Please enter a valid email address.
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="password">Password</label>
+                      <input id="password" type="password" formControlName="password" class="w-full form-control" placeholder="Type your password" />
+                      <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+                        <small class="block p-error text-danger" *ngIf="signUpForm.get('password')?.errors?.['required']">
+                          Password is required.
+                        </small>
+                        <small class="block p-error text-danger" *ngIf="signUpForm.get('password')?.errors?.['minlength']">
+                          Password must be at least 6 characters long.
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="confirmPassword">Confirm Password</label>
+                      <input id="confirmPassword" type="password" formControlName="confirmPassword" class="w-full form-control" placeholder="Confirm Password" />
+                      <div *ngIf="signUpForm.errors?.['mismatch']">
+                        <small class="block p-error text-danger">Passwords do not match.</small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="errorMessage" class="alert alert-danger my-2 text-center">
+                    {{ errorMessage }}
+                  </div>
+
+                  <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input me-2" type="checkbox" value="false" id="form2Example3c" name="checked" formControlName="checked"/>
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in <a href="#!">Terms of service</a>
+                    </label>
+                  </div>
+
+                  <div class="mt-2 text-center my-3">Already a member? <a routerLink="/login">Login</a></div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary btn-lg" [disabled]="signUpForm.invalid">
+                      Sign Up
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-  
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" formControlName="email" class="form-control" />
-        <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
-          <small *ngIf="signUpForm.get('email')?.errors?.['required']">Email is required.</small>
-          <small *ngIf="signUpForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password" class="form-control" />
-        <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
-          <small *ngIf="signUpForm.get('password')?.errors?.['required']">Password is required.</small>
-          <small *ngIf="signUpForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input id="confirmPassword" type="password" formControlName="confirmPassword" class="form-control" />
-        <div *ngIf="signUpForm.errors?.['mismatch']">
-          <small>Passwords do not match.</small>
-        </div>
-      </div>
-  
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-      </div>
-  
-      <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid">Sign Up</button>
-    </form>
+    </div>
   </div>
-  
+</div>
