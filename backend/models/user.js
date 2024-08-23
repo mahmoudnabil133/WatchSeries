@@ -71,7 +71,6 @@ UserSchema.methods.correctPassword = async function(candidatePasswrod, userPassw
 // changing password after the token is created
 UserSchema.methods.changedPassword = function(JWTTimeStamp) {
   if (this.passwordChangedAt){
-    console.log('sasa')
     const passworChangingTime = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
     return passworChangingTime > JWTTimeStamp
   }
