@@ -96,7 +96,7 @@ const protect = async(req, res, next)=>{
         const user = await User.findById(decoded.id)
         if (!user) throw new Error('user not found');
         if (user.changedPassword(decoded.iat)) {
-            throw new Error('token didnt changed after password please login again')
+            throw new Error('token didnt changed after updating password please login again')
         }
         // allow access to user
         req.user = user
@@ -117,7 +117,7 @@ const isAuth = async(req, res)=>{
         const user = await User.findById(decoded.id);
         if (!user) throw new Error('user not found');
         if (user.changedPassword(decoded.iat)) {
-            throw new Error('token didnt changed after password please login again')
+            throw new Error('token didnt changed after updating  password please login again')
         }
         res.status(200).json({
             valid: true

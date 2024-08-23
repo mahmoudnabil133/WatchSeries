@@ -1,4 +1,7 @@
 const express = require("express");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 const connectDB = require("./config");
 const tvRouter = require("./routes/tvRouter");
 const seasonRouter = require("./routes/seasonRouter");
@@ -26,7 +29,7 @@ app.use("/shows", tvRouter);
 app.use("/seasons", seasonRouter);
 app.use("/episodes", episodeRouter);
 app.use("/users", userRouter);
-app.use('/genres', genresRouter)
+app.use('/genres', genresRouter);
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
   connectDB();

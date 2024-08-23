@@ -28,5 +28,7 @@ export const routes: Routes = [
     component: EpisodeDetailsComponent,
   },
   { path: 'users/:userId/watchList', component: WatchListComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
