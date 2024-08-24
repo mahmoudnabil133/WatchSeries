@@ -1,14 +1,15 @@
-<div class="container">
-  @if (!watchList || !watchList.length) {
-  <div style="height: 54vh">
-    <h1 class="text-center">WatchList is Empty!</h1>
-  </div>
-  }@else {
-  <h1 class="text-center my-4">WatchList</h1>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">My Watch List</h2>
 
-  <div class="row justify-content-center mb-4">
-    <div class="row row-cols-1 row-cols-md-3 g-4 pb-4">
-      <div class="col" *ngFor="let show of watchList; trackBy: trackById">
+  <!-- Error Message Display -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Watch List Display -->
+  <div *ngIf="watchList && watchList.length > 0; else noShows">
+    <div class="row">
+      <div *ngFor="let show of watchList" class="col-md-4 mb-4">
         <div class="card h-100">
           <a [routerLink]="['/shows', show._id]">
             <img
@@ -19,22 +20,27 @@
           </a>
           <div class="card-body">
             <h5 class="card-title">{{ show.name }}</h5>
-            <h6 class="card-subtitle text-muted">
-              {{ show.first_air_date | date : "longDate" }}
-            </h6>
-            <p class="card-text">
-              {{ show.overview || "No overview available" }}
-            </p>
-            <p class="card-text">
-              <small class="text-muted">
-                Seasons: {{ show.number_of_seasons }}, Episodes:
-                {{ show.number_of_episodes }}
-              </small>
-            </p>
+            <p class="card-text"><strong>Overview:</strong> {{ show.overview }}</p>
+            <p class="card-text"><strong>First Air Date:</strong> {{ show.first_air_date }}</p>
+            <p class="card-text"><strong>Popularity:</strong> {{ show.popularity }}</p>
+            <p class="card-text"><strong>Vote Average:</strong> {{ show.vote_average }} ({{ show.vote_count }} votes)</p>
+            <p class="card-text"><strong>Number of Seasons:</strong> {{ show.number_of_seasons }}</p>
+            <p class="card-text"><strong>Number of Episodes:</strong> {{ show.number_of_episodes }}</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-danger w-100" (click)="removeFromWatchList(show._id)">
+              Remove from Watch List
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  }
+
+  <!-- No Shows Message -->
+  <ng-template #noShows>
+    <div class="text-center">
+      <h4>Your watch list is empty.</h4>
+    </div>
+  </ng-template>
 </div>

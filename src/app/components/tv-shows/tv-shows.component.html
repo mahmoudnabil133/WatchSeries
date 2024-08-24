@@ -71,15 +71,23 @@
                 <h6 class="card-subtitle text-muted">
                   {{ show.first_air_date | date : "longDate" }}
                 </h6>
-                <p class="card-text">
+                <!-- <p class="card-text">
                   {{ show.overview || "No overview available" }}
-                </p>
+                </p> -->
                 <p class="card-text">
                   <small class="text-muted">
                     Seasons: {{ show.number_of_seasons }}, Episodes:
                     {{ show.number_of_episodes }}
                   </small>
                 </p>
+                <button
+                class="btn btn-lg text-light d-flex align-items-center"
+                (click)="addToWatchList(show._id)"
+                style="background-color: #2522c6"
+              >
+                <i class="fa-solid fa-tv me-2"></i> + watch list
+              </button>
+              
               </div>
             </div>
           </div>

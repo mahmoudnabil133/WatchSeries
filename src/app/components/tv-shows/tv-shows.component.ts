@@ -4,6 +4,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { TvShowService } from '../../services/tv-show.service';
 import { FormsModule, NgModel } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-tv-shows',
@@ -23,7 +24,9 @@ export class TvShowsComponent implements OnInit, OnDestroy {
   genres_ids: any[] = [];
   rate!: number;
 
-  constructor(private showServ: TvShowService) {
+  constructor(private showServ: TvShowService,
+    private userServ: UserService
+  ) {
     this.currentPage = new BehaviorSubject<number>(this.page);
   }
 
@@ -63,6 +66,20 @@ export class TvShowsComponent implements OnInit, OnDestroy {
       this.genres_ids.push(genreId)
     }
     this.loadShows()
+  }
+  addToWatchList(showId: string){
+    this.userServ.addToWatchList(showId).subscribe({
+      next: (response) => {
+        if (response.success) {
+          alert('series added to watch list');
+        } else {
+          alert(response.message); // Display server-side message
+        }
+      },
+      error: (error) => {
+        alert(error.message); // Display server-side error message
+      }
+    });
   }
   nextPage() {
     if (this.page < this.totalPages) {

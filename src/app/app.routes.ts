@@ -19,6 +19,7 @@ export const routes: Routes = [
   { path: 'setting', component: UserSettingComponent, canActivate: [AuthGards] },
   { path: 'myProfile', component: MyProfileComponent, canActivate: [AuthGards] },
   { path: 'shows/:id', component: TvDetailsComponent, canActivate: [AuthGards] },
+  { path: 'watchList', component: WatchListComponent, canActivate: [AuthGards] },
   {
     path: 'shows/:id/seasons/:seasonNumber',
     component: SeasonDetailsComponent,
@@ -27,6 +28,5 @@ export const routes: Routes = [
     path: 'shows/:showId/seasons/:seasonId/episodes/:episodeNumber',
     component: EpisodeDetailsComponent,
   },
-  { path: 'users/:userId/watchList', component: WatchListComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
