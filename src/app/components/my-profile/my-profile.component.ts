@@ -10,6 +10,22 @@ import { RouterLink } from '@angular/router';
   templateUrl: './my-profile.component.html',
   styleUrl: './my-profile.component.css'
 })
-export class MyProfileComponent  {
+export class MyProfileComponent implements OnInit {
+  user: any;
+  constructor(
+    private userService: UserService 
+  ) {};
+
+  ngOnInit(): void {
+    this.userService.myProfile().subscribe({
+      next: (response) => {
+        this.user = response.data;
+        console.log(this.user);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
 
 }
