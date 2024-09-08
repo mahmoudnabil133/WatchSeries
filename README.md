@@ -1,27 +1,71 @@
-# Day4
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+# WatchSeries
 
-## Development server
+## Project Overview
+WatchSeries is a full-stack web application built with Angular for the frontend and Node.js/Express for the backend. Follow these steps to set up and run the project locally on Windows, macOS, and Linux.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Prerequisites
+Make sure the following tools are installed globally:
+- Node.js & npm
+- npx
+- Angular CLI
 
-## Code scaffolding
+You can install these using the following commands:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Windows/macOS/Linux:
+```bash
+npm install -g npx
+npm install -g npm
+npm install -g @angular/cli
+```
 
-## Build
+### Installation and Running
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### 1. Backend Setup
+1. Open a terminal or command prompt.
+2. Navigate to the backend directory:
+    ```bash
+    cd backend
+    ```
+3. Install the required backend dependencies:
+    ```bash
+    npm install
+    ```
+4. Run the backend server in development mode:
+    ```bash
+    npm run dev
+    ```
+This will start the backend server, typically running at `http://localhost:3000`.
 
-## Running unit tests
+#### 2. Frontend Setup
+1. Open another terminal or command prompt.
+2. Navigate to the project root directory:
+    ```bash
+    cd ../
+    ```
+3. Install the frontend dependencies:
+    ```bash
+    npm install
+    ```
+4. Serve the frontend application:
+    ```bash
+    ng serve -o
+    ```
+This will start the Angular development server and open the app in your browser at `http://localhost:4200`.
+### Summary of Commands
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Backend:
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-## Running end-to-end tests
+#### Frontend:
+```bash
+npm install
+ng serve -o
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Conclusion
+Follow these steps, and you'll have both the backend and frontend running locally. Enjoy using the WatchSeries app!
